@@ -176,13 +176,6 @@ e.g. ttn-account-v2.XLXDZg4cTdT0X-4obr4F3A5StKGlt49VeqBMQl-QIRo
 
 Note we need ports open to be able to talk to TTN:
 
-```22/tcp   open  ssh         OpenSSH 7.2p2 Ubuntu 4ubuntu2.4 (Ubuntu Linux; protocol 2.0)
-| ssh-hostkey: 
-|   2048 98:d8:1e:a6:03:8d:4d:2e:ab:61:cb:9d:38:08:7d:c7 (RSA)
-|_  256 22:fa:5a:b1:3b:83:9d:c9:3c:b9:8c:be:47:25:a6:62 (ECDSA)
-80/tcp   open  http        Apache httpd 2.4.18 ((Ubuntu))
-|_http-server-header: Apache/2.4.18 (Ubuntu)
-1720/tcp open  h323q931?
 1880/tcp open  http        Node.js (Express middleware)
 | http-methods: 
 |_  Supported Methods: GET HEAD OPTIONS
