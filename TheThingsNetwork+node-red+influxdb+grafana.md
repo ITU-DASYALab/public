@@ -1,13 +1,13 @@
-# InfluxDB Grafana TTN - install log
+#  TTN & node-RED & InfluxDB & Grafana- install log
 
-The installation followed
+This installation follows
 
 https://www.thethingsnetwork.org/labs/story/store-and-visualize-data-using-influxdb-and-grafana
 
 
-## essential reading
+## Essential reading
 
-to understand the ttn node-red connection, the mqtt formats etc:
+to understand the ttn node-red connection, the MQTT formats etc:
 
 https://www.thethingsnetwork.org/docs/applications/nodered/quick-start.html
 https://www.thethingsnetwork.org/docs/applications/mqtt/api.html#device-events
@@ -25,7 +25,6 @@ Check your version in case of troubles!
 
 sebastian@NewThing:~$ node -v
 v4.2.6
-
 
 Depending on versions, weather and time of day, you might need to install npm separately (not included in nodejs) etc - 
 
@@ -114,7 +113,7 @@ time			value
 1517486615830199079	231
 
 
-(this example taken later, after sending measuremnts to db, obviously
+(this example taken later, after sending measuremnts to db, obviously)
 ```
 ## Integrating node-RED & influxDB
 
