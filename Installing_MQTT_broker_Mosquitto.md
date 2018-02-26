@@ -1,5 +1,8 @@
 # Setting up a MQTT broker
 
+(The whole thing takes about 30 minutes max - straight forward)
+
+
 Following recommendation here, and to stay close to TTN,
 
 https://www.thethingsnetwork.org/docs/applications/mqtt/
@@ -13,9 +16,9 @@ starting with:
 https://mosquitto.org/download/
 
 which tell us to 
-
+```
 apt-get install mosquitto
-
+```
 The server listens on the following ports:
 
 ```
