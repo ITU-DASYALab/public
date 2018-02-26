@@ -42,10 +42,15 @@ mosquit+ 28508  0.0  0.0  42128  4876 ?        S    13:36   0:00 /usr/sbin/mosqu
 https://stackoverflow.com/questions/26716279/how-to-test-the-mosquitto-server
 
 Start the command line subscriber:
+
+```
 mosquitto_sub -v -t 'test/topic'
+```
 
 Publish test message with the command line publisher:
+```
 mosquitto_pub -t 'test/topic' -m 'helloWorld'
+```
 
 works!
 
@@ -56,3 +61,5 @@ Try mqtt-spy for some more testing:
 http://kamilfb.github.io/mqtt-spy/
 
 (depends on java jre 8+, opwnjfx - follow guide
+
+Behaves a bit beta-ish but works.
