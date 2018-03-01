@@ -63,3 +63,33 @@ http://kamilfb.github.io/mqtt-spy/
 (depends on java jre 8+, opwnjfx - follow guide
 
 Behaves a bit beta-ish but works.
+
+MQTT.fx seems a good GUI client across platforms.
+
+## Securing MQTT (somewhat)
+
+
+MQTT with TLS/SSL works very much the same as https (which people typically are familiar with from web usage).
+
+Configuration also reminds of apache setup.
+
+The fastes way to tets it might be letsencrypt certificates, skipping the more complicated path of doing your own CA, and requesting from that one:
+
+https://mosquitto.org/man/mosquitto-tls-7.html
+
+
+Example with letsencrypt certificates:
+
+/etc/mosquitto/conf.d/ssl.conf
+```
+listener 8883
+certfile /etc/letsencrypt/live/influx.itu.dk/cert.pem
+cafile /etc/letsencrypt/live/influx.itu.dk/chain.pem
+keyfile /etc/letsencrypt/live/influx.itu.dk/privkey.pem```
+```
+
+A mosquitto_pub client would publish like this:
+
+```
+mosquitto_pub -h influx.itu.dk -p 8883 --capath /etc/ssl/certs/ -t topic/test -m "encrypted msg"
+```
