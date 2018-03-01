@@ -34,6 +34,12 @@ http://<IP>:1880
 
 works!
 
+### Important notes to self
+
+node-RED names its flows after the hostname ... whenever you change hostname, you ll lose your flows!
+
+check startup on command line to see which flows it s trying to open, and rename accordingly.
+
 
 ## Installing influxdb
 
