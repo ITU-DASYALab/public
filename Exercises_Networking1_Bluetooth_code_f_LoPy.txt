@@ -1,0 +1,93 @@
+======================================
+Bluetooth GATT server
+======================================
+
+from network import Bluetooth
+from network import WLAN
+from struct import unpack
+import time
+
+#Setup the LoPy as a GATT server. You need to set a name and a service uuid
+
+bluetooth = Bluetooth()
+bluetooth.advertise(True)
+bluetooth.set_advertisement(name='helloPy', service_uuid=b'1234567890123456')
+
+#Here we define a service for a client to access.
+
+serv = bluetooth.service(uuid=b'1234567890123456', isprimary=True,nbr_chars=2)
+serv.start()
+
+#Here we define a characteristic. This is the values that a client are allowed to interact with.
+
+hello = serv.characteristic(uuid=555, value=1)
+
+print('starting GATT server')
+
+#Method that reacts when a device connects, or disconnects.
+
+def conn_cb (bt_o):
+    events = bt_o.events()
+    if events & Bluetooth.CLIENT_CONNECTED:
+        print("Client connected")
+    elif events & Bluetooth.CLIENT_DISCONNECTED:
+        print("Client disconnected")
+
+#Method that reacts on a client writing to our charecteristic.
+
+def hello_handler(char):
+    events = char.events()
+    if events & Bluetooth.CHAR_WRITE_EVENT:
+        tempValue = unpack("<H", char.value())[0]
+        print(tempValue)
+        for cycle in range (tempValue):
+            print('hello')
+
+#Our callbacks that binds specific events to specific methods.
+
+bluetooth.callback(trigger=Bluetooth.CLIENT_CONNECTED | Bluetooth.CLIENT_DISCONNECTED, handler=conn_cb)
+
+hello_cb = hello.callback(trigger=Bluetooth.CHAR_WRITE_EVENT, handler=hello_handler)
+
+
+==========================================
+Bluetooth GATT client
+==========================================
+
+from network import Bluetooth
+import binascii
+from struct import pack
+bluetooth = Bluetooth()
+
+print ('starting GATT client')
+
+# scan until we can connect to any BLE device around
+bluetooth.start_scan(-1)
+adv = None
+while True:
+    adv = bluetooth.get_adv()
+    if adv:
+        try:
+            #Only connect if we find the correct name
+            if bluetooth.resolve_adv_data(adv.data, Bluetooth.ADV_NAME_CMPL) == 'helloPy':
+                connection = bluetooth.connect(adv.mac)
+                break
+        except:
+            # start scanning again
+            bluetooth.start_scan(-1)
+            continue
+print("Connected to device with addr = {}".format(binascii.hexlify(adv.mac)))
+
+#Find services offered by the device
+
+services = connection.services()
+print(services)
+for service in services:
+    uuid = service.uuid()
+
+    #If the service matches Server UUID, write to its characteristic
+
+    if uuid == b'1234567890123456':
+        char = service.characteristics()[0]
+        value = pack('<H', 10)
+char.write(value)

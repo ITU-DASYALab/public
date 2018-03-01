@@ -1,0 +1,57 @@
+======================================
+ping
+======================================
+
+from network import LoRa
+import pycom
+import socket
+import time
+
+# EU Frequiency between 863000000 and 870000000
+# You must select the same frequency on both devices
+
+lora = LoRa(mode=LoRa.LORA, frequency=865000000)
+s = socket.socket(socket.AF_LORA, socket.SOCK_RAW)
+
+#Blocking is set to false here. You can experiemnt with timeouts if you want to
+s.setblocking(False)
+pycom.heartbeat(False)
+
+print('Starting Ping')
+
+while True:
+    try:
+        s.send('Ping')
+        for cycles in range(10): # stop after 10 cycles
+            pycom.rgbled(0x007f00) # green
+        time.sleep(3)
+        pycom.rgbled(0x7f0000) # red
+        time.sleep(2)
+
+    except OSError:
+        print('Cannot find partner')
+pass
+
+==========================================
+pong
+==========================================
+
+from network import LoRa
+import socket
+import time
+
+# EU Frequiency between 863000000 and 870000000
+# You must select the same frequency on both devices
+
+lora = LoRa(mode=LoRa.LORA, frequency=865000000)
+s = socket.socket(socket.AF_LORA, socket.SOCK_RAW)
+s.setblocking(False)
+
+print('Starting Pong')
+
+while True:
+    # The maximum amount of bytes that can be received is set to 64 here.
+    # You can play around with that number if needed. 
+    if s.recv(64) == b'Ping':
+        s.send('Pong')
+print('Got Ping')
