@@ -1,0 +1,458 @@
+============================================
+TEXT GUIDE for LoRaWan, LoPy, sensors LAB
+============================================
+
+
+THIS PART covered in SLIDES:
+
+
+Understand LoRa, LoRaWan, TheThingsNetwork
+============================================
+
+and how the three relate.
+
+
+Essentials of LoRaWan security
+============================================
+
+Understand 
+
+Device, App, Networks EUIs and keys
+
+DevEUI
+AppEUI, AppKey
+
+
+
+======================================================
+
+======================================================
+
+Work with your LoPy / pymakr.
+============================================
+
+We demo this.
+
+Understand:
+
+Atom IDE
+REPL
+CTRL-A,B,C,D
+uploading
+syncing
+
+
+What is the REPL?
+MicroPython Interactive Interpreter Mode. A commonly used term for this is REPL (read-eval-print-loop) which will be used to refer to this interactive prompt.
+It looks like this:
+
+>>>
+
+Learn how it works: https://docs.pycom.io/pycom_esp32/reference/repl.html
+
+
+CTRL-A
+raw REPL - we wont need this.
+
+CTRL-B:
+brings you back to REPL.
+
+CTRL-C:
+You can interrupt a running program by pressing Ctrl-C. This will raise a KeyboardInterrupt which will bring you back to the REPL, providing your program doesn’t intercept the KeyboardInterrupt exceptio
+
+CTRL-D:
+performs a soft reset. You will see a message something like:
+
+>>>
+PYB: soft reboot
+MicroPython v1.4.6-146-g1d8b5e5 on 2016-10-21; LoPy with ESP32
+Type "help()" for more information.
+>>>
+
+Another way to do a soft reset:
+>>> import sys
+>>> sys.exit()
+
+or, as python code:
+
+raise SystemExit
+
+
+
+
+When things go wrong - and they do! - ... you can:
+========================================================
+
+Reset with button.
+
+Reconnect device.
+
+Do a hard reset:
+>>> import machine
+>>> machine.reset()
+
+Factory reset the file system:
+
+>>> import os
+>>> os.mkfs('/flash')
+
+Safe Boot.
+
+Update Firmware.
+
+Learn more:
+https://docs.pycom.io/pycom_esp32/pycom_esp32/toolsandfeatures.html#safeboot
+
+==============================================================================================
+
+Now that we control the LoPy (somewhat),
+let s try a  project:
+
+Make a new project,
+make a new empty folder for it.
+
+take some sample code, e.g. the traffic light,
+and paste it into a new window:
+
+----------------------------------------------------
+import pycom
+import time
+pycom.heartbeat(False)
+for cycles in range(10): # stop after 10 cycles
+    pycom.rgbled(0x007f00) # green
+    time.sleep(5)
+    pycom.rgbled(0x7f7f00) # yellow
+    time.sleep(1.5)
+    pycom.rgbled(0x7f0000) # red
+    time.sleep(4)
+----------------------------------------------------
+
+Save as main.py.
+
+To be safe, also make a boot.py:
+
+----------------------------------------------------
+from machine import UART
+import os
+uart = UART(0, 115200)
+os.dupterm(uart)
+----------------------------------------------------
+
+Now sync that project into the device:
+
+Now, here i often hang ... i do
+>>> import os
+>>> os.mkfs('/flash')
+
+>>> os.listdir()
+[]
+>>> os.getcwd()
+'/flash'
+
+More on this:
+https://micropython.org/resources/docs/en/latest/wipy/library/os.html
+
+The sync:
+
+Syncing the project with the Pycom device. Please wait...
+Successfully synced!
+
+Note!!! You cannot sync if your i2c bus is busy, e.g. busy with a sensor.
+
+Soft reboot, and you code should run -
+e.g. the traffic light.
+
+
+==============================================================================================
+
+Now let s talk LoRa.
+
+First, let s get our DevEUI:
+
+----------------------------------------------------
+#get your device's EUI
+from network import LoRa
+import binascii
+lora = LoRa(mode=LoRa.LORAWAN)
+print(binascii.hexlify(lora.mac()).upper().decode('utf-8'))
+----------------------------------------------------
+
+Now that we know our DevEUI,
+
+we need to go to
+
+TTN and register our Devices under a certain App that we agreed on.
+
+I create a Forum thread -
+groups fill in their Device ID with group number.
+
+Everybody is welcome to register on TTN themselves, if they like to.
+
+When this is done, we know our AppEUI and AppKey,
+which we share on thw forum again.
+
+We are ready to run this code, to register our device OTAA:
+
+----------------------------------------------------------------------
+import binascii
+import pycom
+import socket
+import time
+from network import LoRa
+
+# Colors
+off = 0x000000
+red = 0xff0000
+green = 0x00ff00
+blue = 0x0000ff
+
+# Turn off heartbeat LED
+pycom.heartbeat(False)
+
+# Initialize LoRaWAN radio
+lora = LoRa(mode=LoRa.LORAWAN)
+
+# Set network keys
+app_eui = binascii.unhexlify('YOUR_APP_EUI')
+app_key = binascii.unhexlify('YOUR_APP_KEY')
+
+# Join the network
+lora.join(activation=LoRa.OTAA, auth=(app_eui, app_key), timeout=0)
+pycom.rgbled(red)
+
+# Loop until joined
+while not lora.has_joined():
+    print('Not joined yet...')
+    pycom.rgbled(off)
+    time.sleep(0.1)
+    pycom.rgbled(red)
+    time.sleep(2)
+
+print('Joined')
+pycom.rgbled(blue)
+
+s = socket.socket(socket.AF_LORA, socket.SOCK_RAW)
+s.setsockopt(socket.SOL_LORA, socket.SO_DR, 5)
+s.setblocking(True)
+
+i = 0
+while True:
+    count = s.send(bytes([i % 256]))
+    print('Sent %s bytes' % count)
+    pycom.rgbled(green)
+    time.sleep(0.1)
+    pycom.rgbled(blue)
+    time.sleep(9.9)
+    i += 1
+--------------------------------------------------------------------------
+
+
+Check if all devices show up  ok, and are sending data.
+
+=======================================================================
+Sensors
+=======================================================================
+
+Now we can look at reading data from any sensor.
+
+
+A general sensor can be read like this:
+
+---------------------------------------------------------------------
+#reading an analog sensor with lopy
+#https://docs.pycom.io/pycom_esp32/library/machine.ADC.html#class-adcchannel-read-analog-values-from-internal-or-external-sources
+import machine
+adc = machine.ADC()             # create an ADC object
+apin = adc.channel(pin='P17')   # create an analog pin on P17 - look out for pin confusion
+for cycles in range(1000): # stop after 1000 cycles
+    val = apin()                    # read an analog value
+    apin.value()			# same
+    print(val)
+    time.sleep(1)
+---------------------------------------------------------------------
+
+
+Now combine the two elements -
+
+1/ LoRaWan network
+&
+2/ Sensors
+
+to send sensor data to TTN.
+
+You may want to start sending some bogus data at first,
+and then add the actual sender readings.
+
+
+-----------------------------------------------------------------------------
+
+Here is code specific to the
+
+Sensor stick
+
+https://www.tindie.com/products/miceuz/i2c-soil-moisture-sensor/
+
+
+
+
+---------------------------------------------------------------------
+import time
+from machine import I2C
+from struct import unpack
+class Chirp:
+	def __init__(self, address):
+		self.i2c = I2C(0, I2C.MASTER, baudrate=10000)
+		self.address = address
+
+	def get_reg(self, reg):
+		val = unpack('<H', (self.i2c.readfrom_mem(self.address, reg, 2)))[0]
+		return (val >> 8) + ((val & 0xFF) << 8)
+
+	def moist(self):
+		return self.get_reg(0)
+
+	def temp(self):
+		return self.get_reg(5)
+
+	def light(self):
+		self.i2c.writeto(self.address, '\x03')
+		time.sleep(1.5)
+		return self.get_reg(4)
+
+if __name__ == '__main__':
+	addr = 0x20 #or 32
+	chirp = Chirp(addr)
+	for cycles in range(10):
+		print('moist: ' +str(chirp.moist()))
+		print('temp: ' +str(chirp.temp()))
+		print('light: ' +str(chirp.light()))
+		time.sleep(1)
+---------------------------------------------------------------------
+
+
+A possible combination (sensor + TTN)  is:
+
+------------------------------------------------------------------------------
+
+import time
+import binascii
+import pycom
+import socket
+from machine import I2C
+from struct import unpack
+from network import LoRa
+
+off = 0x000000
+red = 0xff0000
+green = 0x00ff00
+blue = 0x0000ff
+
+class Chirp:
+	def __init__(self, address):
+		self.i2c = I2C(0, I2C.MASTER, baudrate=10000)
+		self.address = address
+
+	def get_reg(self, reg):
+		val = unpack('<H', (self.i2c.readfrom_mem(self.address, reg, 2)))[0]
+		return (val >> 8) + ((val & 0xFF) << 8)
+
+	def moist(self):
+		return self.get_reg(0)
+
+	def temp(self):
+		return self.get_reg(5)
+
+	def light(self):
+		self.i2c.writeto(self.address, '\x03')
+		time.sleep(1.5)
+		return self.get_reg(4)
+
+class LoRaNetwork:
+	def __init__(self):
+		# Turn off hearbeat LED
+		pycom.heartbeat(False)
+		# Initialize LoRaWAN radio
+		self.lora = LoRa(mode=LoRa.LORAWAN)
+		# Set network keys
+		app_eui = binascii.unhexlify('70B3D57EF0003F19')
+		app_key = binascii.unhexlify('E449A879CF9745F49AC8BE656A56993F')
+		# Join the network
+		self.lora.join(activation=LoRa.OTAA, auth=(app_eui, app_key), timeout=0)
+		pycom.rgbled(red)
+		# Loop until joined
+		while not self.lora.has_joined():
+			print('Not joined yet...')
+			pycom.rgbled(off)
+			time.sleep(0.1)
+			pycom.rgbled(red)
+			time.sleep(2)
+		print('Joined')
+		pycom.rgbled(blue)
+		self.s = socket.socket(socket.AF_LORA, socket.SOCK_RAW)
+		self.s.setsockopt(socket.SOL_LORA, socket.SO_DR, 5)
+		self.s.setblocking(True)
+		self.bytesarraytemp = bytearray(2)
+		#sensor
+		addr = 0x20 #or 32
+		self.chirp = Chirp(addr)
+
+	def convertbytes(self, data):
+		self.bytesarraytemp[0] = (data & 0xFF00) >> 8
+		self.bytesarraytemp[1] = (data & 0x00FF)
+		return self.bytesarraytemp
+	
+	def senddata(self):
+		while True:
+			count = self.s.send(self.convertbytes(self.chirp.temp()))	
+			print(count)
+			count = self.s.send(self.convertbytes(self.chirp.moist()))	
+			print(count)
+			count = self.s.send(self.convertbytes(self.chirp.light()))
+			print(count)
+			pycom.rgbled(green)
+			time.sleep(0.1)
+			pycom.rgbled(blue)
+			time.sleep(9.9)
+
+start = LoRaNetwork()
+start.senddata()
+----------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

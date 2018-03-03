@@ -1,0 +1,21 @@
+Exercise
+
+Find a MQTT client for your laptop OS, 
+install and configure
+to send messages to
+
+influx.itu.dk:1883
+topic/test
+
+subscribe to topics, create new topics and share
+
+
+download and install wireshark.
+use wireshark to monitor your communication.
+
+Let the LoPy send MQTT messages:
+
+https://docs.pycom.io/chapter/tutorials/all/mqtt.html
+
+(This guide is for adafruit broker -
+how would you send to influx.itu.dk instead?)
