@@ -68,6 +68,7 @@ MQTT.fx seems a good GUI client across platforms.
 
 ## Securing MQTT (somewhat)
 
+### TLS/SSL
 
 MQTT with TLS/SSL works very much the same as https (which people typically are familiar with from web usage).
 
@@ -93,3 +94,49 @@ A mosquitto_pub client would publish like this:
 ```
 mosquitto_pub -h influx.itu.dk -p 8883 --capath /etc/ssl/certs/ -t topic/test -m "encrypted msg"
 ```
+
+### Users, passwords, ACL
+
+A good guide is at
+
+http://www.steves-internet-guide.com/mqtt-username-password-example/
+
+This resembles htwpasswd quite a bit:
+
+```
+You create the password file using the command
+
+mosquitto_passwd -c passwordfile user
+
+
+to add additional users to the file:
+
+mosquitto_passwd -b passwordfile user password
+
+
+```
+
+ACLs: take the example file that comes with the installation, in our case
+```
+/usr/share/doc/mosquitto/examples/aclfile.example
+```
+
+The manpage is here:
+
+https://mosquitto.org/man/mosquitto-conf-5.html
+
+
+```
+cat /usr/share/doc/mosquitto/examples/aclfile.example
+# This affects access control for clients with no username.
+topic read $SYS/#
+
+# This only affects clients with username "roger".
+user roger
+topic foo/bar
+
+# This affects all clients.
+pattern write $SYS/broker/connection/%c/state
+```
+
+
