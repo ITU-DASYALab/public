@@ -139,4 +139,26 @@ topic foo/bar
 pattern write $SYS/broker/connection/%c/state
 ```
 
+A bit surprsing maybe:
 
+user "roger" ist not implicitly given the right to a topic which is allowed for "anonymous".
+
+so in the xample below, the line
+
+``` 
+topic readwrite topic/test
+``` 
+
+is needed in order to let user "roger" write to "topic/test":
+
+``` 
+allow_anonymous true
+
+# This affects access control for clients with no username.
+topic readwrite $SYS/#
+topic readwrite topic/test
+# This only affects clients with username "roger".
+user roger
+topic readwrite building/lock
+topic readwrite topic/test
+``` 
