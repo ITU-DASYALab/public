@@ -145,12 +145,14 @@ Here s an example:
 
 ### ttn device node settings
 
+...
 Name: <free form name>
 App: the verbose name, NOT the hex ID!
 Device ID: the hex id
 Event: <check MQTT docu for possible events>
 ```
-Events: https://www.thethingsnetwork.org/docs/applications/mqtt/api.html#device-events
+    
+Read more about Events: https://www.thethingsnetwork.org/docs/applications/mqtt/api.html#device-events
 
 ### ttn app node settings
 
@@ -165,7 +167,7 @@ e.g. ttn-account-v2.XLXDZg4cTdT0X-4obr4F3A5StKGlt49VeqBMQl-QIRo
 
 Note we need ports open to be able to talk to TTN:
 
-...
+```
 1880/tcp open  http        Node.js (Express middleware)
 | http-methods: 
 |_  Supported Methods: GET HEAD OPTIONS
@@ -174,8 +176,8 @@ Note we need ports open to be able to talk to TTN:
 8083/tcp open  us-srv?
 8086/tcp open  d-s-n?
 8088/tcp open  radan-http?`
-...
 
+```
 
 ## Using functions
 
@@ -198,15 +200,17 @@ var msg2 = { payload: msg.payload[2] };
 return [ msg0, msg1, msg2];
 ``` 
 
-These outputs we then send over to
+These outputs we then send over as ...
 
 ## Input data to influxdb
 
 The receiving database needs to know
 
+```
 server
 database
 name of measurement
+```
 
 that is all.
 
