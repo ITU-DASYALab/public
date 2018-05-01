@@ -145,7 +145,7 @@ Here s an example:
 
 ### ttn device node settings
 
-...
+```
 Name: <free form name>
 App: the verbose name, NOT the hex ID!
 Device ID: the hex id
