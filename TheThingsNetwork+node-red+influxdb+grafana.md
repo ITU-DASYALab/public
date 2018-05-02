@@ -23,7 +23,10 @@ https://www.thethingsnetwork.org/docs/applications/nodered/
 
 This works fine following the guide - except a few self-explaining apt-get glitches -
 
-Note: We found it was important to install the -legacy version of the nodejs package because Node-RED's startup scripts expect your Node.js binary to be named node, but the standard package uses nodejs instead. This is due to a naming conflict with a preexisting package. Easy to fix.
+Note: We found it was important to install the -legacy version of the nodejs package because Node-RED's startup scripts expect your Node.js binary to be named node, but the standard package uses nodejs instead. This is due to a naming conflict with a preexisting package. Easy to fix by means of a symlink/ alias too: in your ../bin directory, do
+```
+ln -s nodejs ./node
+```
 
 Check your version in case of troubles!
 
@@ -35,6 +38,7 @@ Depending on versions, weather and time of day, you might need to install npm se
 When done, try reaching your web interface on
 
 http://yourServerIP:1880
+
 
 
 ### Important note to self
@@ -102,6 +106,8 @@ time			value
 
 (this example taken later, after sending measurements to db, obviously)
 ```
+
+
 ## Integrating node-RED & influxDB
 
 Sending data from Node-RED to Influx is self explanatory and easy, via the influx node:
