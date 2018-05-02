@@ -8,6 +8,62 @@ and is largely just a collection of links and remarks where necessary.
 
 It is meant for Debian/Ubuntu, however, the main links will provide platform-independent guides - we have had people install the complete set within an hour, following those.
 
+For the impatient, here s a summary of all commands run in a full installation - for details, scroll down:
+
+## Installation / commands summary (Debian/Ubuntu)
+
+```
+// Node-RED
+
+# apt-get install nodejs     (<<< or nodejs-legacy)
+# nodejs -v                  ( or: node -v)
+# apt install npm
+# npm install -g --unsafe-perm node-red
+
+(start with)
+
+# node-red
+
+(should give result)
+
+2 May 09:58:17 - [info] 
+
+Welcome to Node-RED
+===================
+
+2 May 09:58:17 - [info] Node-RED version: v0.18.4
+2 May 09:58:17 - [info] Node.js  version: v4.2.6
+2 May 09:58:17 - [info] Linux 4.4.0-62-generic x64 LE
+2 May 09:58:17 - [info] Loading palette nodes
+2 May 09:58:18 - [warn] ------------------------------------------------------
+2 May 09:58:18 - [warn] [node-red/rpi-gpio] Info : Ignoring Raspberry Pi specific node
+2 May 09:58:18 - [warn] [node-red-node-twitter/twitter] ReferenceError: Invalid left-hand side in assignment
+2 May 09:58:18 - [warn] ------------------------------------------------------
+2 May 09:58:18 - [info] Settings file  : /root/.node-red/settings.js
+2 May 09:58:18 - [info] User directory : /root/.node-red
+2 May 09:58:18 - [warn] Projects disabled : set editorTheme.projects.enabled=true to enable
+2 May 09:58:18 - [info] Flows file     : /root/.node-red/flows_poetry.json
+2 May 09:58:18 - [info] Creating new flow file
+2 May 09:58:18 - [info] Server now running at http://127.0.0.1:1880/
+2 May 09:58:18 - [info] Starting flows
+2 May 09:58:18 - [info] Started flows
+
+// Influx
+
+# apt-get install influxdb influxdb-client
+
+(test with)
+
+# influx
+
+// Grafana
+
+# wget https://s3-us-west-2.amazonaws.com/grafana-releases/release/grafana_5.1.0_amd64.deb
+# sudo dpkg -i grafana_5.1.0_amd64.deb# 
+
+
+```
+
 
 ## Essential reading
 
