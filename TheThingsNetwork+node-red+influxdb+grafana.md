@@ -58,8 +58,8 @@ Welcome to Node-RED
 
 // Grafana
 
-# wget https://s3-us-west-2.amazonaws.com/grafana-releases/release/grafana_5.1.0_amd64.deb
-# sudo dpkg -i grafana_5.1.0_amd64.deb
+# wget https://s3-us-west-2.amazonaws.com/grafana-releases/release/grafana_5.3.2_amd64.deb
+# sudo dpkg -i grafana_5.3.2_amd64.deb
 # service grafana-server start
 
 
