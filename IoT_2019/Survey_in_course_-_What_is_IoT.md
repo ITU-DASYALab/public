@@ -1,4 +1,9 @@
-## Defining scope and expectations, we ask all stundents for their view on what IoT is
+#### Defining scope and expectations, we ask all stundents for their view on what IoT is
+
+
+Inline-style: 
+![WhatIsIoT](https://raw.githubusercontent.com/ITU-PITLab/public/master/IoT_2019/whatIsIoT.jpg "What Is IoT")
+
 
 stuffing computers in everything
 
