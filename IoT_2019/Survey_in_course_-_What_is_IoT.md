@@ -16,9 +16,13 @@ constraints - power, networks, form factor
 
 interaction with the "real world"  .... or, physical world
 
-unmanned (...), 
+- sensors, actuators
+
+unmanned (gendered! ed. seb), autonomous
 
 gathering data
+
+- analytics, storage 
 
 services
 
@@ -26,4 +30,4 @@ services
 
 is Alexa IoT?
 
-animals with embedde devices?
+are animals with embedded devices IoT?
