@@ -13,9 +13,11 @@ https://www.thethingsnetwork.org/docs/applications/mqtt/quick-start.html
 ## from influxdb
 
 you could also get data from our influxdb -
-like so:
+like so: (add)
 
 ## integration on TTN
 
 or be added to the TTN app and add your own integration - ask us.
 you could for example send data to your own URL or such.
+
+https://www.thethingsnetwork.org/docs/applications/
