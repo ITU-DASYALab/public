@@ -20,3 +20,11 @@ or send data on to integrations such as AWS
 Read more:
 
 https://www.thethingsnetwork.org/docs/applications/
+
+
+## Grafana data
+
+http://130.226.140.2:3000/
+
+IoT2019
+waterWorld
