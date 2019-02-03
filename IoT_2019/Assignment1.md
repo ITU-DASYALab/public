@@ -2,6 +2,8 @@
 
 Requirements:
 
+we will define these together with our guests from HF Sundbyvester , Feb 4, 2019.
+
 
 
 ## How to get data from our watermeters (or simulations)
