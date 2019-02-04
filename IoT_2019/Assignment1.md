@@ -1,5 +1,6 @@
 ## Defining the assignment
 
+
 Requirements:
 
 we will define these together with our guests from HF Sundbyvester , Feb 4, 2019.
@@ -8,13 +9,13 @@ we will define these together with our guests from HF Sundbyvester , Feb 4, 2019
 
 ## How to get data from our watermeters (or simulations)
 
-There are a lot of wways to access our data:
+For this assignment, we will work on live data - not archived data we already store in timeseries (though we have these, as fallback).
 
-- Read data already received and stored, direct from influxdb - ask us for access
+There are a lot of ways to access our data:
 
 - Read live data via MQTT, API calls, http,
 
-or send data on to integrations such as AWS
+or send data on via integrations such as AWS
 
 
 Read more:
