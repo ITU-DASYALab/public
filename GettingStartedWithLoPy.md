@@ -20,7 +20,7 @@ You are receiving three parts:
 ## Software
 
 For programming the LoPy you have the language choice of using either:
-1. **MicroPython**, with the PyMakr plugin for either Atom or VS Code, or using
+1. **MicroPython**, with the PyMakr plugin for either Atom or VS Code
 2. **C** with the Espressif ESP-IDF framework. 
 
 Choose your own adventure:
