@@ -29,3 +29,12 @@ http://130.226.140.2:3000/
 
 IoT2019
 waterWorld
+
+## HF Sundbyvester facts
+
+163 houses
+
+250 adults
+
+200 kids
+
