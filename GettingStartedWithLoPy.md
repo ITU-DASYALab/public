@@ -21,7 +21,9 @@ You are receiving three parts:
 
 For programming the LoPy you have the language choice of using either:
 1. **MicroPython**, with the PyMakr plugin for either Atom or VS Code, or using
-2. **C** with the Espressif ESP-IDF framework. Choose your own adventure:
+2. **C** with the Espressif ESP-IDF framework. 
+
+Choose your own adventure:
 
 ### 1. MicroPython and PyMakr
 
