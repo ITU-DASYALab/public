@@ -8,11 +8,6 @@ You are receiving three parts:
  - an Expansion Board, to provide a USB micro port, connectivity to your computer) - https://pycom.io/product/expansion-board-2-0/
  - an Antenna kit / Antenna and "pigtail" (cable) - https://pycom.io/product/lora-antenna-kit/
 
-##### Specs:
-- [LoPy Datasheet](https://docs.pycom.io/datasheets/development/lopy.html)
-- [Expansion Board Datasheet](https://docs.pycom.io/datasheets/boards/expansion2.html)
-- [Antenna Product Page](https://pycom.io/product/lora-868mhz-915mhz-sigfox-antenna-kit/)
-
 
  ### Remarks on hardware
 
