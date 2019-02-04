@@ -27,7 +27,7 @@ http://130.226.140.2:3000/d/1V60Yo_mz/watermeters-simulations?orgId=1&from=now-2
 
 ### MQTT
 
-this is how you mqtt sub to a watermeter data stream:
+this is how you subscribe to a mqtt topic - giving you data for a specified application:
 
 ```
 mosquitto_sub -h eu.thethings.network -t '+/devices/+/events/activations' -u 'watermeter-test01' -P 'ttn-account-v2.S6_w-wpG19AvLeUNjorYMhx4uctru7dmed_fcTwyvlQ' -v
