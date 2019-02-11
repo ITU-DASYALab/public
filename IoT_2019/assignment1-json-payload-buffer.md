@@ -9,13 +9,14 @@ s:1427:"{"app_id":"watermeter-test01","dev_id":"watersim_sebastian_01_thingsuno1
 
 (which really should be the same in general js):
 
-node.log ("4 watermeter sims")
+```
 var msgAll = { payload: msg.payload};
 var msg0 = { payload :msg.payload[0] };
 var msg1 = { payload :msg.payload[1] };
 var msg2 = { payload: msg.payload[2] };
 var msg3 = { payload: msg.payload[3] };
 return [ msg0, msg1, msg2, msg3];
+```
 
 ## more than once an hour?
 
