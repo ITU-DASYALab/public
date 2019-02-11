@@ -24,6 +24,8 @@ also, if you d like to test code on something that sends more often than once an
 
 this app sends a temperature every 2 minutes:
 
+```
 pitlab-ds18b20
 app key:
 ttn-account-v2.D7-uy5QHbEvbjOv65hV_DI4chfWPAC0tWTGNQoiGYno
+```
