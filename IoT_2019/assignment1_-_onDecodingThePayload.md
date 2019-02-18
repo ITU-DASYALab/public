@@ -67,11 +67,14 @@ https://en.wikipedia.org/wiki/Base64
 
 pseudocode:
 
+```
 get the raw payload
 
 decode base64
 
 read as 4 bytes in a buffer
+
+```
 
 ==> you re done!
 
