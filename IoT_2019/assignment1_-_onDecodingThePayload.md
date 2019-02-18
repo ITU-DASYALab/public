@@ -63,11 +63,25 @@ read
 
 https://en.wikipedia.org/wiki/Base64
 
+## how to decode
+
+pseudocode:
+
+get the raw payload
+
+decode base64
+
+read as 4 bytes in a buffer
+
+==> you re done!
+
 ## Online encoders/decoders
 
 https://cryptii.com/
 
 (thanks to course students for showing me this)
+
+![Cryptii tool](https://raw.githubusercontent.com/ITU-PITLab/public/master/IoT_2019/cryptii.png "Cryptii tool")
 
 
 
