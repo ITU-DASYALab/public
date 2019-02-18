@@ -48,7 +48,7 @@ buffer[4]
 This is an array of decimal values
 
 
-## on the linux cmd line
+## On the linux cmd line
 ```
 echo `echo AAgAFQ== | base64 --decode`
 (something unreadable) - why?
@@ -57,13 +57,13 @@ echo `echo AAgAFQ== | base64 --decode`
 (it is a buffer, not a string!)
 
 
-## why do we always end with "=="?
+## Why do we always end with "=="?
 
 read
 
 https://en.wikipedia.org/wiki/Base64
 
-## how to decode
+## How to decode
 
 pseudocode:
 
