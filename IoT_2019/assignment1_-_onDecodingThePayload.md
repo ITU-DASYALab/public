@@ -63,3 +63,11 @@ read
 
 https://en.wikipedia.org/wiki/Base64
 
+## Online encoders/decoders
+
+https://cryptii.com/
+
+(thanks to course students for showing me this)
+
+
+
