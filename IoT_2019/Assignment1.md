@@ -77,7 +77,7 @@ https://www.thethingsnetwork.org/docs/devices/bytes.html
 
 We have an InfluxDB available on the server training.itu.dk -
 
-and you may request accunts on that server (just give us your public ssh key).
+and you may request accounts on that server (just give us your public ssh key).
 
 ```
 sebastian@training:~$ influx
