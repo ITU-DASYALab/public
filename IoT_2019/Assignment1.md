@@ -72,3 +72,40 @@ s:1448:"{"app_id":"watermeter-test01","dev_id":"watersim_sebastian_01_thingsuno1
 Some more info:
 
 https://www.thethingsnetwork.org/docs/devices/bytes.html
+
+## InfluxDB
+
+We have an InfluxDB available on the server training.itu.dk -
+
+and you may request accunts on that server (just give us your public ssh key).
+
+```
+sebastian@training:~$ influx
+Visit https://enterprise.influxdata.com to register for updates, InfluxDB server management, and monitoring.
+Connected to http://localhost:8086 version 1.1.1
+InfluxDB shell version: 1.1.1
+> help
+Usage:
+        connect <host:port>   connects to another node specified by host:port
+        auth                  prompts for username and password
+        pretty                toggles pretty print for the json format
+        use <db_name>         sets current database
+        format <format>       specifies the format of the server responses: json, csv, or column
+        precision <format>    specifies the format of the timestamp: rfc3339, h, m, s, ms, u or ns
+        consistency <level>   sets write consistency level: any, one, quorum, or all
+        history               displays command history
+        settings              outputs the current settings for the shell
+        exit/quit/ctrl+d      quits the influx shell
+
+        show databases        show database names
+        show series           show series information
+        show measurements     show measurement information
+        show tag keys         show tag key information
+        show field keys       show field key information
+
+        A full list of influxql commands can be found at:
+        https://docs.influxdata.com/influxdb/latest/query_language/spec/
+
+> 
+```
+
