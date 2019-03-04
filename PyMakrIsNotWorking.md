@@ -25,3 +25,6 @@ os.mkfs('/flash')
 And run it on the LoPy. This flashes a clean file system to the device. The press the reset button and connect and try to upload the code again.
 3. Unplug the device and plug it in again
 4. Restart Atom / VS Code
+
+### Other random problems and fixes that people have reported
+ - (Windows) Auto-connect on Atom tried to connect to the wrong port. Turn off auto-connect and manually enter the right port name in the global settings.

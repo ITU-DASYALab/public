@@ -2,12 +2,12 @@
 
 ## Hardware / Parts
 
-You are receiving three parts:
+You are receiving four parts:
 
  - a LoPy - https://pycom.io/product/lopy4/
  - an Expansion Board, to provide a USB micro port, connectivity to your computer - https://pycom.io/product/expansion-board-3-0/ or a pytrack (expandion board + a few goodies) - https://pycom.io/product/pytrack/
  - an Antenna kit / Antenna and "pigtail" (cable) - https://pycom.io/product/lora-antenna-kit/
-
+ - a micro USB cable
 
  ### Remarks on hardware
 
@@ -20,7 +20,7 @@ You are receiving three parts:
 ## Software
 
 For programming the LoPy you have the language choice of using either:
-1. **MicroPython**, with the PyMakr plugin for either Atom or VS Code
+1. **MicroPython**, with the PyMakr plugin for Atom (or VS Code, but we have limited experience with this)
 2. **C** with the Espressif ESP-IDF framework. 
 
 Choose your own adventure:
@@ -32,7 +32,7 @@ MicroPython is a Python 3.5 implementation that is optimised to run on microcont
 About micropython:
 
  - MicroPython is a software implementation of the Python 3 programming language, written in C, that is optimized to run on a microcontroller, without an operating system underneath, directly "on hardware".
- - Knows only two files - when booting, these two files are executed automatically: first boot.py and then main.py.
+ - Knows only two files `boot.py` and `main.py` - when booting, these two files are executed automatically: first `boot.py` and then `main.py`.
 
 
 If you are not familiar with python, here is some start helpers:
@@ -52,8 +52,8 @@ https://docs.pycom.io
 
 We will be using the Pymakr plugin to communicate with the pycom device.
 Installation guides:
-1. [Atom](https://docs.pycom.io/pymakr/installation/atom.html)
-2. [VS Code](https://docs.pycom.io/pymakr/installation/vscode.html)
+1. [Atom](https://docs.pycom.io/pymakr/installation/atom.html) (__Preferred__)
+2. [VS Code](https://docs.pycom.io/pymakr/installation/vscode.html) (_A bit more troublesome_)
 
 #### Connecting to the LoPY
 
@@ -84,7 +84,7 @@ Serial connection via USB cable is our preferred choice - rather than WiFi.
  Now, let s say "hello world":
 
  ```
- >>> print 'hello world!'
+ >>> print('hello world!')
   ```
 
   - Stop WiFi AP - per default, the LoPys start running a WiFi Access Point - that is a bad idea in many ways (in what ways?)
@@ -128,7 +128,12 @@ and ready to take on more challenging code examples, such as sensors and network
 
 Espressifs own [get started guide](https://docs.espressif.com/projects/esp-idf/en/latest/get-started/index.html#) is pretty good.
 
-**Important note**: For the expansion boards we are working with, we need to connect the `G23` pin to `GND` in order to flash the device. So every time you upload a new version of the code to the device, you need to:
+**Important note**: 
+The steps you need to take depend on the type of development board you have, check the back of the board for the version number.
+
+If you have an expansion board __version 3.x__, you need to use [pycoms own fork of the esp-idf](https://github.com/pycom/pycom-esp-idf)
+
+For expansion boards __version 2.x__, we can use the official repo, but we need to connect the `G23` pin to `GND` in order to flash the device. So every time you upload a new version of the code to the device, you need to:
 1. Unplug the USB
 2. Connect the `G23` pin to `GND`
 3. Connect USB
