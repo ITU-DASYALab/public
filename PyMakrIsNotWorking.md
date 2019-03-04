@@ -27,4 +27,7 @@ And run it on the LoPy. This flashes a clean file system to the device. The pres
 4. Restart Atom / VS Code
 
 ### Other random problems and fixes that people have reported
- - (Windows) Auto-connect on Atom tried to connect to the wrong port. Turn off auto-connect and manually enter the right port name in the global settings.
+
+- PyMakr seems to be working better in Atom than in VS Code
+- If you can see the device, but it's listed with a wrong manufacturer, it might be a faulty USB cable.
+- Auto-Connect in Atom on Windows sometimes finds a wrong port. It's better to disable auto-connect, find the right port in your device manager and enter that manually
