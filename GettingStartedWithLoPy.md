@@ -4,8 +4,8 @@
 
 You are receiving three parts:
 
- - a LoPy - https://pycom.io/product/lopy/
- - an Expansion Board, to provide a USB micro port, connectivity to your computer) - https://pycom.io/product/expansion-board-2-0/
+ - a LoPy - https://pycom.io/product/lopy4/
+ - an Expansion Board, to provide a USB micro port, connectivity to your computer - https://pycom.io/product/expansion-board-3-0/ or a pytrack (expandion board + a few goodies) - https://pycom.io/product/pytrack/
  - an Antenna kit / Antenna and "pigtail" (cable) - https://pycom.io/product/lora-antenna-kit/
 
 
