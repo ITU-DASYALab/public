@@ -179,12 +179,21 @@ print(binascii.hexlify(lora.mac()).upper().decode('utf-8'))
 
 Now that we know our DevEUI,
 
-we need to go to
+we need to either
 
-TTN and register our Devices under a certain App that we agreed on.
+1/ register on TTN, make an application, register our device
 
-I create a Forum thread -
-groups fill in their Device ID with group number.
+or
+
+2/ collaborate on the current  course app called "iot2019-course" (ask lecturer, TA)
+
+or
+
+3/ request keys from lecturer, TA
+
+There s also a LearnIT Forum thread -
+
+groups fill in their Device ID with group number/name.
 
 Everybody is welcome to register on TTN themselves, if they like to.
 
