@@ -22,9 +22,14 @@ When the LoPy is running blocking code, it sometimes does not respond very much,
 import os
 os.mkfs('/flash')
 ```
-And run it on the LoPy. This flashes a clean file system to the device. The press the reset button and connect and try to upload the code again.
+And run it on the LoPy. This flashes a clean file system to the device. The press the reset button and connect and try to upload the code again. Remember to remove this again, because it flashes a clean filesystem to the device, so it will also delete your main.py every time you turn it on.
 3. Unplug the device and plug it in again
 4. Restart Atom / VS Code
+
+#### PyMakr keeps saying something about "safe booting" and then failing to upload code.
+
+1. Make sure that "safe\_boot\_on\_upload" is set to "true" in your pymakr.conf
+2. If you don't have a pymakr.conf file. Change it in global settings, or press Settings -> project Settings to generate a conf-file
 
 ### Other random problems and fixes that people have reported
 
