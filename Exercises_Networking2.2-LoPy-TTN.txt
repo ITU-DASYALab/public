@@ -265,7 +265,8 @@ Sensors
 Now we can look at reading data from any sensor.
 
 
-A general sensor can be read like this:
+A general sensor can be read like this - note that this will work and produce some (random!) numbers
+even if there is no actual sensor attached: 
 
 ---------------------------------------------------------------------
 #reading an analog sensor with lopy
@@ -279,6 +280,17 @@ for cycles in range(1000): # stop after 1000 cycles
     print(val)
     time.sleep(1)
 ---------------------------------------------------------------------
+
+If you are using a pytrack or pysense board,
+you could start reading the accelerometer:
+
+https://docs.pycom.io/tutorials/pytrack.html
+
+
+
+--------------------------------------------------------------------
+
+
 
 
 Now combine the two elements -
