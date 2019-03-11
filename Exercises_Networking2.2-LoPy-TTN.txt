@@ -189,16 +189,16 @@ or
 
 or
 
-3/ request keys from lecturer, TA
+3/ request keys for existing application from lecturer, TA
 
 There s also a LearnIT Forum thread -
 
-groups fill in their Device ID with group number/name.
+groups can (but dont have to!) fill in their Device ID with group number/name.
 
 Everybody is welcome to register on TTN themselves, if they like to.
 
 When this is done, we know our AppEUI and AppKey,
-which we share on thw forum again.
+which we can share on the forum again, where needed.
 
 We are ready to run this code, to register our device OTAA:
 
@@ -295,137 +295,9 @@ and then add the actual sender readings.
 
 -----------------------------------------------------------------------------
 
-Here is code specific to the
+Here is code specific to the sensor we ll be using:
 
-Sensor stick
-
-https://www.tindie.com/products/miceuz/i2c-soil-moisture-sensor/
-
-
-
-
----------------------------------------------------------------------
-import time
-from machine import I2C
-from struct import unpack
-class Chirp:
-	def __init__(self, address):
-		self.i2c = I2C(0, I2C.MASTER, baudrate=10000)
-		self.address = address
-
-	def get_reg(self, reg):
-		val = unpack('<H', (self.i2c.readfrom_mem(self.address, reg, 2)))[0]
-		return (val >> 8) + ((val & 0xFF) << 8)
-
-	def moist(self):
-		return self.get_reg(0)
-
-	def temp(self):
-		return self.get_reg(5)
-
-	def light(self):
-		self.i2c.writeto(self.address, '\x03')
-		time.sleep(1.5)
-		return self.get_reg(4)
-
-if __name__ == '__main__':
-	addr = 0x20 #or 32
-	chirp = Chirp(addr)
-	for cycles in range(10):
-		print('moist: ' +str(chirp.moist()))
-		print('temp: ' +str(chirp.temp()))
-		print('light: ' +str(chirp.light()))
-		time.sleep(1)
----------------------------------------------------------------------
-
-
-A possible combination (sensor + TTN)  is:
-
-------------------------------------------------------------------------------
-
-import time
-import binascii
-import pycom
-import socket
-from machine import I2C
-from struct import unpack
-from network import LoRa
-
-off = 0x000000
-red = 0xff0000
-green = 0x00ff00
-blue = 0x0000ff
-
-class Chirp:
-	def __init__(self, address):
-		self.i2c = I2C(0, I2C.MASTER, baudrate=10000)
-		self.address = address
-
-	def get_reg(self, reg):
-		val = unpack('<H', (self.i2c.readfrom_mem(self.address, reg, 2)))[0]
-		return (val >> 8) + ((val & 0xFF) << 8)
-
-	def moist(self):
-		return self.get_reg(0)
-
-	def temp(self):
-		return self.get_reg(5)
-
-	def light(self):
-		self.i2c.writeto(self.address, '\x03')
-		time.sleep(1.5)
-		return self.get_reg(4)
-
-class LoRaNetwork:
-	def __init__(self):
-		# Turn off hearbeat LED
-		pycom.heartbeat(False)
-		# Initialize LoRaWAN radio
-		self.lora = LoRa(mode=LoRa.LORAWAN)
-		# Set network keys
-		app_eui = binascii.unhexlify('70B3D57EF0003F19')
-		app_key = binascii.unhexlify('E449A879CF9745F49AC8BE656A56993F')
-		# Join the network
-		self.lora.join(activation=LoRa.OTAA, auth=(app_eui, app_key), timeout=0)
-		pycom.rgbled(red)
-		# Loop until joined
-		while not self.lora.has_joined():
-			print('Not joined yet...')
-			pycom.rgbled(off)
-			time.sleep(0.1)
-			pycom.rgbled(red)
-			time.sleep(2)
-		print('Joined')
-		pycom.rgbled(blue)
-		self.s = socket.socket(socket.AF_LORA, socket.SOCK_RAW)
-		self.s.setsockopt(socket.SOL_LORA, socket.SO_DR, 5)
-		self.s.setblocking(True)
-		self.bytesarraytemp = bytearray(2)
-		#sensor
-		addr = 0x20 #or 32
-		self.chirp = Chirp(addr)
-
-	def convertbytes(self, data):
-		self.bytesarraytemp[0] = (data & 0xFF00) >> 8
-		self.bytesarraytemp[1] = (data & 0x00FF)
-		return self.bytesarraytemp
-	
-	def senddata(self):
-		while True:
-			count = self.s.send(self.convertbytes(self.chirp.temp()))	
-			print(count)
-			count = self.s.send(self.convertbytes(self.chirp.moist()))	
-			print(count)
-			count = self.s.send(self.convertbytes(self.chirp.light()))
-			print(count)
-			pycom.rgbled(green)
-			time.sleep(0.1)
-			pycom.rgbled(blue)
-			time.sleep(9.9)
-
-start = LoRaNetwork()
-start.senddata()
-----------------------------------------------------------------------------------------------
+(tbc)
 
 
 
