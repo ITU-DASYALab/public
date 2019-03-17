@@ -1,0 +1,82 @@
+## Dimensioning a pv system
+
+First rule: minimize load!
+
+Collect realistic data for 
+insolation, load, time characteristics, etc
+
+Conservative approach to dimensioning
+
+- Know your load
+- Decide how much uptime without recharge you need (longest dark period)
+==> Battery Capacity
+- Decide how long it may take to recharge the battery
+==> Solar panel size
+
+
+## Dimensioning exercise
+
+### Dimensioning a photovoltaic system: First approximation
+
+You could call this the "battery approach" - we start with
+ looking at the total load of consuming devices
+ how long we need to keep them running without sun -
+ then we calculate the battery capacity and everything else from there.
+
+All numbers here are of course just examples – total load, insolation hours and other factors will be different from case to case!
+
+
+To start, we need to know two things:
+Total Load at 12 Volts [W]: e.g. 20 Watt (==> 1.7 A)
+Days of Autonomy, that means: how long we can run without sun: 
+we will say 3 days a 8 hours a day ==> 24 hours.
+These two lead us to ...
+Total Battery Capacity needed [Ah]: 40 = 24 h * 1.7 A
+
+However, no battery should be discharged completely ever - the maximum discharge depends on the type of battery. Read your data sheet!
+What is the maximum discharge level of the batteries? e.g. 50%: 50%
+With this correction, we get ...
+Total Battery Capacity needed [Ah]: 80
+
+Now that we know the battery capacity, we need to know how many days we allow for full recharging, once the sun is shining
+Maximum time for recharging [days]: 1
+How many hours of sun on an average day? 5
+This gives us the total power of the solar panels needed – we will need to have 40/5 A flowing into the battery
+We need this many Watts from the 12 Volts panels: 60 Watt!
+
+60 Watt of panels to power 20 Watt of consumer devices, for some of the time.
+And we are only using it 8 hours a day, and have not been demanding a long autonomy phase.
+For nonstop operations, it would be approximately 200 Watts!
+Let us look at the same system from a different angle.
+
+### Dimensioning a photovoltaic system: Second approximation
+
+This is the "worst month approach", simplified. That means, we will
+calculate how much energy (power x time) we need per month
+take the month with the least sun
+see how many solar panels we need to generate the needed energy in that worst month
+
+Again , we need to know the ...
+Total Load at 12 Volts [W]: 20
+How many hours per day do we need our devices running? 8
+
+this tells us, how many AmpHours will be needed:
+Total AmpHours per month: 400  (30 days * 8 hours * 1.7 A)
+What are the average sunshine hours in the worst (darkest) month of the year? 
+150 (i.e. 5 hours a day ... a sunny climate)
+
+These hours will have to be enough to generate the same amount of AmpHours we found above – this tells us how many watts of solar power we need:
+Total Watts of 12 V Solar Panels: 32 Watt
+
+Now we still need to know our battery capacity – again based on:
+Days of Autonomy, that means: how long we can run without sun: 3
+and
+The maximum discharge level of the batteries? 50
+This results in
+Total Battery Capacity 50 Ah
+
+This second approach leads to a far more optimistic result - only 1/2 of the solar panel power needed.
+
+Discuss!
+Why is this the case?
+What does the "worst month model" neglect?
