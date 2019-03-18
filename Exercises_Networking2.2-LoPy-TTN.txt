@@ -219,7 +219,7 @@ blue = 0x0000ff
 pycom.heartbeat(False)
 
 # Initialize LoRaWAN radio
-lora = LoRa(mode=LoRa.LORAWAN)
+lora = LoRa(mode=LoRa.LORAWAN, region=LoRa.EU868)
 
 # Set network keys
 app_eui = binascii.unhexlify('YOUR_APP_EUI')
