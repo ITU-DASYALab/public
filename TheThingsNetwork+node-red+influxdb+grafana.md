@@ -56,6 +56,22 @@ Welcome to Node-RED
 
 # influx
 
+/// influxdb - first steps
+
+> CREATE DATABASE cloudnet01
+> use cloudnet01
+Using database cloudnet01
+> 
+
+admin user:
+
+CREATE USER <username> WITH PASSWORD '<password>' WITH ALL PRIVILEGES
+
+
+GRANT READ, WRITE or ALL database privileges to an existing user
+GRANT [READ,WRITE,ALL] ON <database_name> TO <username>
+
+
 // Grafana
 
 # wget https://s3-us-west-2.amazonaws.com/grafana-releases/release/grafana_5.3.2_amd64.deb
