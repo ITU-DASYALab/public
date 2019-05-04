@@ -56,21 +56,6 @@ Welcome to Node-RED
 
 # influx
 
-/// influxdb - first steps
-
-> CREATE DATABASE cloudnet01
-> use cloudnet01
-Using database cloudnet01
-> 
-
-admin user:
-
-CREATE USER <username> WITH PASSWORD '<password>' WITH ALL PRIVILEGES
-
-
-GRANT READ, WRITE or ALL database privileges to an existing user
-GRANT [READ,WRITE,ALL] ON <database_name> TO <username>
-
 
 // Grafana
 
@@ -141,6 +126,17 @@ InfluxDB shell 0.10.0
 (to see all commands)
 
 
+
+admin user:
+
+CREATE USER <username> WITH PASSWORD '<password>' WITH ALL PRIVILEGES
+
+GRANT READ, WRITE or ALL database privileges to an existing user
+GRANT [READ,WRITE,ALL] ON <database_name> TO <username>
+
+
+
+
 > CREATE DATABASE pit001
 
 > show databases
@@ -179,6 +175,19 @@ time			value
 1517485821014042293	4
 
 (this example taken later, after sending measurements to db, obviously)
+
+
+write via http API like so
+(https://docs.influxdata.com/influxdb/v1.7/tools/api/):
+
+$ curl -i -XPOST "http://h1.less.dk:8086/write?db=test01&precision=s&u=test&p=password" --data-binary 'delete01,mytag=1 myfield=90 1463683075'
+
+
+> select * from "delete01"
+name: delete01
+time                myfield mytag
+----                ------- -----
+1463683075000000000 90      1
 ```
 
 
