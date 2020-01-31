@@ -20,7 +20,7 @@ You are receiving four parts:
 ## Software
 
 For programming the LoPy you have the language choice of using either:
-1. **MicroPython**, with the PyMakr plugin for Atom (or VS Code, but we have limited experience with this)
+1. **MicroPython**, with the PyMakr plugin for Atom or VS Code <-- __Strongly recommended__
 2. **C** with the Espressif ESP-IDF framework. 
 
 Choose your own adventure:
@@ -52,8 +52,8 @@ https://docs.pycom.io
 
 We will be using the Pymakr plugin to communicate with the pycom device.
 Installation guides:
-1. [Atom](https://docs.pycom.io/pymakr/installation/atom.html) (__Preferred__)
-2. [VS Code](https://docs.pycom.io/pymakr/installation/vscode.html) (_A bit more troublesome_)
+1. [Atom](https://docs.pycom.io/pymakr/installation/atom.html)
+2. [VS Code](https://docs.pycom.io/pymakr/installation/vscode.html)
 
 #### Connecting to the LoPY
 
