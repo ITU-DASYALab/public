@@ -92,7 +92,8 @@ Serial connection via USB cable is our preferred choice - rather than WiFi.
 
   ```
 from network import WLAN
-  # turn off Wifi
+wlan = WLAN() # we call the constructor without params
+# turn off Wifi
 wlan.deinit()
 print('Turned off WiFi')
  ```
