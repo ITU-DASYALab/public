@@ -1,17 +1,22 @@
 Exercise
 
+1/ MQTT basics
+
 Find a MQTT client for your laptop OS, 
 install and configure
 to send messages to
 
 influx.itu.dk:1883
-topic/test
+
+with topic (status March 2020)
+
+IoT2020/#
+
+  (this means, any topic underneath IoT2020/ is accepted)
 
 subscribe to topics, create new topics and share
 
-
-download and install wireshark.
-use wireshark to monitor your communication.
+2/ MQTT & micropyhton
 
 Let the LoPy send MQTT messages:
 
