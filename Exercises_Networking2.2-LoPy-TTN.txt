@@ -185,7 +185,7 @@ we need to either
 
 or
 
-2/ collaborate on the current  course app called "iot2019-course" (ask lecturer, TA)
+2/ collaborate on the current  course app called "iot2020-course" (ask lecturer, TA)
 
 or
 
