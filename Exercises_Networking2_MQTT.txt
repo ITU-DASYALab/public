@@ -24,3 +24,7 @@ https://docs.pycom.io/chapter/tutorials/all/mqtt.html
 
 (This guide is for adafruit broker -
 how would you send to influx.itu.dk instead?)
+
+3/ Use MQTT to listen to The Things Network applications
+
+https://www.thethingsnetwork.org/docs/applications/mqtt/quick-start.html
