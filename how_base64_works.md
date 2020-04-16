@@ -19,6 +19,7 @@ base64 breaks this into groups of 6 bits:
 100000	000101	111010	010110	111001	100110	000000	000000	011010	11
 
 which each can be read as decimals from 0 to 64, pointing at chars in the base64 set:
+	https://en.wikipedia.org/wiki/Base64#Base64_table
 100000	000101	111010	010110	111001	100110	000000	000000	011010	11  <== note the hanging two bits!
 32	5	58	22	57	38	0	0	26
 g	F	6	W	5	m	A	A	a
